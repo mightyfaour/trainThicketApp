@@ -1,4 +1,4 @@
-package com.example.trainthicketapp.model;
+package com.example.trainthicketapp.model.data;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
@@ -29,7 +29,7 @@ public class PassengerInfo {
     @JsonFormat (shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy")
 
     private Date travelDate;
-    private double fare;
+    private double TotalFare;
 
 
 }

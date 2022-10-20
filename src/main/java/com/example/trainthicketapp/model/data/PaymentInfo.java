@@ -1,4 +1,4 @@
-package com.example.trainthicketapp.model;
+package com.example.trainthicketapp.model.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
