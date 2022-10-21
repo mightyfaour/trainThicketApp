@@ -30,7 +30,8 @@ public class BookingServiceImpl implements BookingService {
 
         paymentInfo.setPassengerId(passengerInfo.getId());
 
-        paymentInfo.setTotlaFare();
+        paymentInfo.setFare();
+
         paymentInfoRepository.save(paymentInfo);
 
     }
