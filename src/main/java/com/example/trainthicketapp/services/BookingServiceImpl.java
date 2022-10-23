@@ -6,11 +6,13 @@ import com.example.trainthicketapp.exception.InsufficientBalanceException;
 import com.example.trainthicketapp.model.data.Booking;
 import com.example.trainthicketapp.model.data.PassengerInfo;
 import com.example.trainthicketapp.model.data.PaymentInfo;
+import com.example.trainthicketapp.model.repositories.BookingRepository;
 import com.example.trainthicketapp.model.repositories.PassengerInfoRepository;
 import com.example.trainthicketapp.model.repositories.PaymentInfoRepository;
 import com.example.trainthicketapp.utility.PaymentGatewaySimulator;
 import lombok.Getter;
 import lombok.Setter;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,22 +28,28 @@ public class BookingServiceImpl implements BookingService {
 
     @Autowired
     private PassengerInfoRepository passengerInfoRepository;
+    @Autowired
+    private BookingRepository bookingRepository;
+    @Autowired
+    private ModelMapper modelMapper;
 
-    public BookingResponse bookTicket(BookingRequest BookingRequest) throws InsufficientBalanceException {
-        BookingResponse bookingResponse = null;
-        PassengerInfo passengerInfo = passengerInfoRepository.save(BookingRequest.getPassengerInfo());
 
-        PaymentInfo paymentInfo = BookingRequest.getPaymentInfo();
 
-        PaymentGatewaySimulator.validateFareBalanceCriteria(paymentInfo.getAccountNo(), passengerInfo.getFare());
-
-        paymentInfo.setPassengerId(passengerInfo.getId());
-
-        paymentInfo.setTotalFare(passengerInfo.getFare());
-
-        paymentInfoRepository.save(paymentInfo);
-
-    }
+//    public BookingResponse bookTicket(BookingRequest BookingRequest) throws InsufficientBalanceException {
+//        BookingResponse bookingResponse = null;
+//        PassengerInfo passengerInfo = passengerInfoRepository.save(BookingRequest.getPassengerInfo());
+//
+//        PaymentInfo paymentInfo = BookingRequest.getPaymentInfo();
+//
+//        PaymentGatewaySimulator.validateFareBalanceCriteria(paymentInfo.getAccountNo(), passengerInfo.getFare());
+//
+//        paymentInfo.setPassengerId(passengerInfo.getId());
+//
+//        paymentInfo.setTotalFare(passengerInfo.getFare());
+//
+//        paymentInfoRepository.save(paymentInfo);
+//
+//    }
     public BookingResponse bookTicket(BookingRequest bookingRequest) throws InsufficientBalanceException {
 
         Booking booking = new Booking();
@@ -62,8 +70,7 @@ public class BookingServiceImpl implements BookingService {
         booking.setPassengerId(passenger.getId());
         Booking passengerBooked = bookingRepository.save(booking);
 
-        BookingResponse response = modelMapper.map(passengerBooked, Booking.class);
+        BookingResponse response = modelMapper.map(passengerBooked, BookingResponse.class);
         return response;
-
     }
 }
