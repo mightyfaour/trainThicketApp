@@ -6,10 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -22,10 +19,11 @@ public class PaymentInfo {
     @Id
     @GeneratedValue(generator = "UUID2")
     @GenericGenerator(name="UUID2", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(unique = true)
     private String paymentId;
     private String accountNo;
     private double amount;
-    private String cardType;
+    private Cardtype cardType;
     private long passengerId;
 
 

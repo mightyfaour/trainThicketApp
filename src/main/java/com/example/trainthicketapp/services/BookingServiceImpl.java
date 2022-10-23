@@ -8,10 +8,14 @@ import com.example.trainthicketapp.model.data.PaymentInfo;
 import com.example.trainthicketapp.model.repositories.PassengerInfoRepository;
 import com.example.trainthicketapp.model.repositories.PaymentInfoRepository;
 import com.example.trainthicketapp.utility.PaymentGatewaySimulator;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@Getter
+@Setter
 public class BookingServiceImpl implements BookingService {
 
     @Autowired
@@ -22,7 +26,7 @@ public class BookingServiceImpl implements BookingService {
 
     public BookingResponse bookTicket(BookingRequest BookingRequest) throws InsufficientBalanceException {
         BookingResponse bookingResponse = null;
-        PassengerInfo passengerInfo = PassengerInfoRepository.save(BookingRequest.getPassengerInfo());
+        PassengerInfo passengerInfo = passengerInfoRepository.save(BookingRequest.getPassengerInfo());
 
         PaymentInfo paymentInfo = BookingRequest.getPaymentInfo();
 
@@ -30,7 +34,7 @@ public class BookingServiceImpl implements BookingService {
 
         paymentInfo.setPassengerId(passengerInfo.getId());
 
-        paymentInfo.setFare();
+        paymentInfo.setTotalFare(passengerInfo.getFare());
 
         paymentInfoRepository.save(paymentInfo);
 

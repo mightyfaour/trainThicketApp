@@ -15,11 +15,11 @@ import java.util.Date;
 @Entity
 @Table(name="PASSENGER_INFO")
 public class PassengerInfo {
-    @javax.persistence.Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long Id;
     private String firstName;
-    private String secondName;
+    private String lastName;
     private String email;
     private String source;
     private String destination;
@@ -32,4 +32,7 @@ public class PassengerInfo {
     private double TotalFare;
 
 
+    public Object getFare() {
+        return TotalFare;
+    }
 }
