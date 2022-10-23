@@ -2,10 +2,9 @@ package com.example.trainthicketapp.model.data;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Getter
@@ -29,10 +28,5 @@ public class PassengerInfo {
     @JsonFormat (shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy")
 
     private Date travelDate;
-    private double TotalFare;
-
-
-    public Object getFare() {
-        return TotalFare;
-    }
+    private BigDecimal fare;
 }

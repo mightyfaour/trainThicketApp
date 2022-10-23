@@ -13,7 +13,11 @@ import lombok.Setter;
 @Setter
 public class BookingRequest {
 
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String destination;
+    private String arrivalTime;
     private PaymentInfo paymentInfo;
-    private PassengerInfo passengerInfo;
 
 }
