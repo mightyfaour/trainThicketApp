@@ -14,6 +14,7 @@ import java.util.Date;
 @Entity
 @Table(name="PASSENGER_INFO")
 public class PassengerInfo {
+
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long Id;
